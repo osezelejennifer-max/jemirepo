@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jemi Alonge — DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0c10;
+    --surface: #10141c;
+    --surface2: #161b26;
+    --border: rgba(255,255,255,0.07);
+    --accent: #00e5a0;
+    --accent2: #007aff;
+    --text: #e8eaf0;
+    --muted: #6b7280;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Fraunces', serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--mono);
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,160,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,160,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .header-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .header-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.2s forwards;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 480px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.3s forwards;
+  }
+
+  .header-meta {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-size: 14px;
+    color: var(--text);
+  }
+
+  .meta-value a {
+    color: var(--accent2);
+    text-decoration: none;
+  }
+
+  .meta-value a:hover { text-decoration: underline; }
+
+  .status-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 6px;
+    box-shadow: 0 0 8px var(--accent);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  section:nth-of-type(1) { animation-delay: 0.5s; }
+  section:nth-of-type(2) { animation-delay: 0.6s; }
+  section:nth-of-type(3) { animation-delay: 0.7s; }
+  section:nth-of-type(4) { animation-delay: 0.8s; }
+  section:nth-of-type(5) { animation-delay: 0.9s; }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 2.5rem;
+  }
+
+  .section-num {
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── ABOUT ── */
+  .about-text {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(232,234,240,0.8);
+    max-width: 640px;
+  }
+
+  .about-text strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    border: 1px solid var(--border);
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .skill-group {
+    background: var(--surface);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+
+  .skill-group:hover { background: var(--surface2); }
+
+  .skill-group-title {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 12px;
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    color: var(--text);
+    border-color: rgba(0,229,160,0.3);
+    background: rgba(0,229,160,0.05);
+  }
+
+  /* ── EXPERIENCE ── */
+  .experience-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .exp-item:last-child { border-bottom: none; }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: 155px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .exp-period {
+    font-size: 12px;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+
+  .exp-current {
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: 4px;
+  }
+
+  .exp-role {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 300;
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-size: 13px;
+    color: var(--accent2);
+    margin-bottom: 0.75rem;
+  }
+
+  .exp-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .exp-bullets li {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    color: var(--accent);
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 2px;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cert-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.25s ease;
+  }
+
+  .cert-card:hover { border-color: rgba(0,229,160,0.2); }
+  .cert-card:hover::after { transform: scaleY(1); }
+
+  .cert-issuer {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .cert-name {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  .cert-year {
+    font-size: 11px;
+    color: var(--accent);
+    margin-top: 8px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 10px 18px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    color: var(--text);
+    border-color: rgba(0,229,160,0.4);
+    background: rgba(0,229,160,0.05);
+  }
+
+  .contact-link svg {
+    width: 14px; height: 14px;
+    fill: currentColor;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .footer-tag {
+    font-size: 11px;
+    color: rgba(0,229,160,0.5);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .exp-item::before { display: none; }
+    .header-meta { gap: 1.5rem; }
+    h1 { font-size: 2.8rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-label">DevOps Engineer &amp; SRE</div>
+    <h1>Jemi<br><em>Alonge</em></h1>
+    <p class="tagline">Building the infrastructure that lets teams ship faster, sleep better, and scale without fear.</p>
+    <div class="header-meta">
+      <div class="meta-item">
+        <span class="meta-label">Experience</span>
+        <span class="meta-value">8+ Years</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Location</span>
+        <span class="meta-value">San Francisco, CA</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Availability</span>
+        <span class="meta-value"><span class="status-dot"></span>Open to opportunities</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Email</span>
+        <span class="meta-value"><a href="mailto:jemi@example.com">jemi@example.com</a></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ABOUT -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>About</h2>
+    </div>
+    <p class="about-text">
+      I'm a DevOps engineer with <strong>8+ years</strong> of experience designing and maintaining
+      cloud-native infrastructure at scale. I specialize in <strong>CI/CD pipeline architecture</strong>,
+      Kubernetes orchestration, and building the observability systems that turn incidents into learning.
+      <br><br>
+      I believe the best infrastructure is invisible — it simply lets developers do their best work.
+      I've helped reduce deployment times by over <strong>70%</strong> and lead on-call rotations
+      for systems handling millions of requests per day.
+    </p>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Skills &amp; Tools</h2>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title">Cloud Platforms</div>
+        <div class="skill-tags">
+          <span class="tag">AWS</span>
+          <span class="tag">GCP</span>
+          <span class="tag">Azure</span>
+          <span class="tag">DigitalOcean</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Containers &amp; Orchestration</div>
+        <div class="skill-tags">
+          <span class="tag">Kubernetes</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Helm</span>
+          <span class="tag">ArgoCD</span>
+          <span class="tag">Istio</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Infrastructure as Code</div>
+        <div class="skill-tags">
+          <span class="tag">Terraform</span>
+          <span class="tag">Ansible</span>
+          <span class="tag">Pulumi</span>
+          <span class="tag">CloudFormation</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">CI/CD</div>
+        <div class="skill-tags">
+          <span class="tag">GitHub Actions</span>
+          <span class="tag">Jenkins</span>
+          <span class="tag">GitLab CI</span>
+          <span class="tag">CircleCI</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Observability</div>
+        <div class="skill-tags">
+          <span class="tag">Prometheus</span>
+          <span class="tag">Grafana</span>
+          <span class="tag">Datadog</span>
+          <span class="tag">ELK Stack</span>
+          <span class="tag">PagerDuty</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Scripting &amp; Dev</div>
+        <div class="skill-tags">
+          <span class="tag">Bash</span>
+          <span class="tag">Python</span>
+          <span class="tag">Go</span>
+          <span class="tag">YAML</span>
+          <span class="tag">SQL</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="experience-list">
+
+      <div class="exp-item">
+        <div class="exp-period">
+          2022 — Present
+          <span class="exp-current">↑ current</span>
+        </div>
+        <div>
+          <div class="exp-role">Senior DevOps Engineer</div>
+          <div class="exp-company">Acme Technologies</div>
+          <ul class="exp-bullets">
+            <li>Led migration of 40+ microservices from bare-metal to EKS, cutting infra costs by 35%</li>
+            <li>Designed GitOps workflow with ArgoCD, reducing deployment frequency from weekly to on-demand</li>
+            <li>Built unified observability stack (Prometheus + Grafana + Loki) adopted across 3 engineering teams</li>
+            <li>Reduced mean time to recovery (MTTR) from 42 min to under 8 min via runbook automation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-period">2020 — 2022</div>
+        <div>
+          <div class="exp-role">DevOps Engineer</div>
+          <div class="exp-company">Bright Labs Inc.</div>
+          <ul class="exp-bullets">
+            <li>Maintained and scaled CI/CD pipelines serving 60+ developers across 5 product teams</li>
+            <li>Provisioned multi-region AWS infrastructure using Terraform and enforced IaC standards</li>
+            <li>Implemented secrets management with HashiCorp Vault, replacing hardcoded credential patterns</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-period">2017 — 2020</div>
+        <div>
+          <div class="exp-role">Systems / Infrastructure Engineer</div>
+          <div class="exp-company">NovaSoft Solutions</div>
+          <ul class="exp-bullets">
+            <li>Managed Linux server fleet (200+ nodes) and introduced configuration management via Ansible</li>
+            <li>Developed internal tooling in Python and Bash to automate routine operational tasks</li>
+            <li>Supported on-call rotation and contributed to SRE practices including SLOs and error budgets</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Certifications</h2>
+    </div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <div class="cert-issuer">Amazon Web Services</div>
+        <div class="cert-name">Solutions Architect — Professional</div>
+        <div class="cert-year">2023</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">Linux Foundation</div>
+        <div class="cert-name">Certified Kubernetes Administrator (CKA)</div>
+        <div class="cert-year">2022</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">HashiCorp</div>
+        <div class="cert-name">Terraform Associate</div>
+        <div class="cert-year">2021</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">Google Cloud</div>
+        <div class="cert-name">Professional Cloud DevOps Engineer</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section>
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-row">
+      <a href="mailto:jemi@example.com" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        jemi@example.com
+      </a>
+      <a href="https://linkedin.com/in/jemialonge" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/jemialonge" class="contact-link" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 002 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0012 2z"/></svg>
+        GitHub
+      </a>
+      <a href="#" class="contact-link">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+        Download CV
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-note">© 2025 Jemi Alonge — DevOps Engineer</span>
+    <span class="footer-tag">// built with precision</span>
+  </footer>
+
+</div>
+</body>
+</html>
